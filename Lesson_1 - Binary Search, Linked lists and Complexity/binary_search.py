@@ -91,6 +91,15 @@ tests.append({
     'output': 0
 })
 
+# Test the worst case scenario
+large_test = {
+    'input': {
+        'cards': list(range(10000000, 0, -1)),
+        'query': 2
+    },
+    'output': 999998
+}
+
 
 def locate_card_linear_search(cards, query):
     """Locate a card with linear search"""
@@ -123,10 +132,7 @@ def locate_card_binary_search(cards, query):
 
     while low <= high:
         mid = (low + high) // 2
-        mid_number = cards[mid]
-
-        print("low:", low, "high:", high, "mid", mid, "mid_number", mid_number)
-
+        #print("low:", low, "high:", high, "mid", mid)
         result = test_location(cards, query, mid)
 
         if result == 'found':
@@ -141,3 +147,13 @@ def locate_card_binary_search(cards, query):
 
 jovian.evaluate_test_cases(locate_card_linear_search, tests)
 jovian.evaluate_test_cases(locate_card_binary_search, tests)
+
+result, passed, runtime = jovian.evaluate_test_case(
+    locate_card_linear_search, large_test, display=False)
+print("\nResult: {}\nPassed: {}\nExecution time: {} ms".format(
+    result, passed, runtime))
+
+result, passed, runtime = jovian.evaluate_test_case(
+    locate_card_binary_search, large_test, display=False)
+print("\nResult: {}\nPassed: {}\nExecution time: {} ms".format(
+    result, passed, runtime))

@@ -145,8 +145,39 @@ def locate_card_binary_search(cards, query):
     return -1
 
 
+def binary_search(lo, hi, condition):
+    """generic implementation of binary search"""
+    while lo <= hi:
+        mid = (lo + hi) // 2
+        result = condition(mid)
+        if result == 'found':
+            return mid
+        elif result == 'left':
+            hi = mid - 1
+        else:
+            lo = mid + 1
+    return -1
+
+
+def locate_card(cards, query):
+    """locate card function based on the generic implementation of binary search"""
+    def condition(mid):
+        if cards[mid] == query:
+            if mid > 0 and cards[mid-1] == query:
+                return 'left'
+            else:
+                return 'found'
+        elif cards[mid] < query:
+            return 'left'
+        else:
+            return 'right'
+
+    return binary_search(0, len(cards) - 1, condition)
+
+
 jovian.evaluate_test_cases(locate_card_linear_search, tests)
 jovian.evaluate_test_cases(locate_card_binary_search, tests)
+jovian.evaluate_test_cases(locate_card, tests)
 
 result, passed, runtime = jovian.evaluate_test_case(
     locate_card_linear_search, large_test, display=False)
@@ -157,3 +188,35 @@ result, passed, runtime = jovian.evaluate_test_case(
     locate_card_binary_search, large_test, display=False)
 print("\nResult: {}\nPassed: {}\nExecution time: {} ms".format(
     result, passed, runtime))
+
+
+# Question: Given an array of integers nums sorted in ascending order,
+# find the starting and ending position of a given number.
+def first_position(nums, target):
+    def condition(mid):
+        if nums[mid] == target:
+            if mid > 0 and nums[mid-1] == target:
+                return 'left'
+            return 'found'
+        elif nums[mid] < target:
+            return 'right'
+        else:
+            return 'left'
+    return binary_search(0, len(nums)-1, condition)
+
+
+def last_position(nums, target):
+    def condition(mid):
+        if nums[mid] == target:
+            if mid < len(nums)-1 and nums[mid+1] == target:
+                return 'right'
+            return 'found'
+        elif nums[mid] < target:
+            return 'right'
+        else:
+            return 'left'
+    return binary_search(0, len(nums)-1, condition)
+
+
+def first_and_last_position(nums, target):
+    return first_position(nums, target), last_position(nums, target)

@@ -1,3 +1,3 @@
-# interview_prep
+# Reference
 
-(Data Structures and Algorithms in Python - Full Course for Beginners)[https://www.youtube.com/watch?v=pkYVOmU3MgA]
+[Data Structures and Algorithms in Python - Full Course for Beginners](https://www.youtube.com/watch?v=pkYVOmU3MgA)

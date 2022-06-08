@@ -97,7 +97,7 @@ large_test = {
         'cards': list(range(10000000, 0, -1)),
         'query': 2
     },
-    'output': 999998
+    'output': 9999998
 }
 
 

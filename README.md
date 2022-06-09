@@ -1,3 +1,3 @@
 # Reference
 
-[Data Structures and Algorithms in Python - Full Course for Beginners](https://www.youtube.com/watch?v=pkYVOmU3MgA)
+[Jovian: Data Structures and Algorithms in Python](https://www.youtube.com/watch?v=pkYVOmU3MgA)

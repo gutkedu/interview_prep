@@ -8,9 +8,9 @@
 # names.
 
 phone_numbers = {
-    'Aakash': '9489484949',
-    'Hemanth': '9595949494',
-    'Siddhant': '9231325312'
+    "Aakash": "9489484949",
+    "Hemanth": "9595949494",
+    "Siddhant": "9231325312",
 }
 
 
@@ -32,7 +32,7 @@ print(len(data_list) == 4096)
 
 # Hashing Function
 
-# A hashing function is used to convert strings and other non-numeric data types
+# A hashing function is used to convert strings and other non-numeric data type
 #  into numbers, which can then be used as list indices. For instance, if a
 # hashing function converts the string "Aakash" into the number 4, then the
 # key-value pair ('Aakash', '7878787878') will be stored at the position 4
@@ -48,7 +48,7 @@ print(len(data_list) == 4096)
 
 
 def get_index(data_list, a_string):
-  # Variable to store the result updated in each iteration
+    # Variable to store the result updated in each iteration
     result = 0
 
     for a_character in a_string:
@@ -61,18 +61,18 @@ def get_index(data_list, a_string):
     return list_index
 
 
-print(get_index(data_list, '') == 0)
-print(get_index(data_list, 'Aakash') == 585)
+print(get_index(data_list, "") == 0)
+print(get_index(data_list, "Aakash") == 585)
 
-idx = get_index(data_list, 'Aakash')
+idx = get_index(data_list, "Aakash")
 print(idx)
 
 list1 = [1, 2, 3, 4, 5]
-list2 = [x*x for x in list1 if x > 2]
+list2 = [x * x for x in list1 if x > 2]
 print(list2)
 
 # To get the list of keys, we can use a simple list comprehension
-kv = ['Aakash', '34343434']
+kv = ["Aakash", "34343434"]
 keys = [kv[0] for kv in data_list if kv is not None]
 print(keys)
 
@@ -123,26 +123,26 @@ class BasicHashTable:
 basic_table = BasicHashTable(max_size=1024)
 print(len(basic_table.data_list) == 1024)
 # Insert some values
-basic_table.insert('Aakash', '9999999999')
-basic_table.insert('Hemanth', '8888888888')
+basic_table.insert("Aakash", "9999999999")
+basic_table.insert("Hemanth", "8888888888")
 # Find a value
-print(basic_table.find('Hemanth') == '8888888888')
+print(basic_table.find("Hemanth") == "8888888888")
 # Update a value
-basic_table.update('Aakash', '7777777777')
+basic_table.update("Aakash", "7777777777")
 # Check the updated value
-print(basic_table.find('Aakash') == '7777777777')
+print(basic_table.find("Aakash") == "7777777777")
 # Get the list of keys
-print(basic_table.list_all() == ['Aakash', 'Hemanth'])
+print(basic_table.list_all() == ["Aakash", "Hemanth"])
 
 # Handling collisions with linear probing
-# As you might have wondered, multiple keys can have the same hash. For instance,
+# As you might have wondered, multiple keys can have the same hash. For instanc
 # the keys "listen" and "silent" have the same hash. This is referred to as
 # collision. Data stored against one key may override the data stored
 # another, if they have the same hash.
 
-basic_table.insert('listen', 99)
-basic_table.insert('silent', 200)
-print(basic_table.find('listen') == basic_table.find('silent'))
+basic_table.insert("listen", 99)
+basic_table.insert("silent", 200)
+print(basic_table.find("listen") == basic_table.find("silent"))
 
 # To handle collisions we'll use a technique called linear probing.
 
@@ -190,17 +190,18 @@ def get_valid_index(data_list, key):
 # Create an empty hash table
 data_list2 = [None] * MAX_HASH_TABLE_SIZE
 # New key 'listen' should return expected index
-print(get_valid_index(data_list2, 'listen') == 655)
+print(get_valid_index(data_list2, "listen") == 655)
 # Insert a key-value pair for the key 'listen'
-data_list2[get_index(data_list2, 'listen')] = ('listen', 99)
+data_list2[get_index(data_list2, "listen")] = ("listen", 99)
 # Colliding key 'silent' should return next index
-print(get_valid_index(data_list2, 'silent') == 656)
+print(get_valid_index(data_list2, "silent") == 656)
 
 # Hash Table with Linear Probing
 
 # We can now implement a hash table with linear probing.
 
-# QUESTION 5: Complete the hash table (with linear probing) implementation below by following the instructions in the comments.
+# QUESTION 5: Complete the hash table (with linear probing) implementation
+# below by following the instructions in the comments.
 
 
 class ProbingHashTable:
@@ -209,9 +210,9 @@ class ProbingHashTable:
         self.data_list = [None] * max_size
 
     def insert(self, key, value):
-      # 1. find the index for the key using get_valid_index
+        # 1. find the index for the key using get_valid_index
         idx = get_valid_index(self.data_list, key)
-      # 2. Store the key value pair at the right index
+        # 2. Store the key value pair at the right index
         self.data_list[idx] = key, value
 
     def find(self, key):
@@ -236,15 +237,15 @@ class ProbingHashTable:
 # Create a new hash table
 probing_table = ProbingHashTable()
 # Insert a value
-probing_table.insert('listen', 99)
+probing_table.insert("listen", 99)
 # Check the value
-print(probing_table.find('listen') == 99)
+print(probing_table.find("listen") == 99)
 # Insert a colliding key
-probing_table.insert('silent', 200)
+probing_table.insert("silent", 200)
 # Check the new and old keys
-print(probing_table.find('listen') == 99 and probing_table.find('silent') == 200)
+print(probing_table.find("listen") == 99 and probing_table.find("silent") == 200)
 # Update a key
-probing_table.insert('listen', 101)
+probing_table.insert("listen", 101)
 # Check the value
-print(probing_table.find('listen') == 101)
-print(probing_table.list_all() == ['listen', 'silent'])
+print(probing_table.find("listen") == 101)
+print(probing_table.list_all() == ["listen", "silent"])

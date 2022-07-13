@@ -1,6 +1,7 @@
 # QUESTION: Write a function to reverse a linked list
 
-class Node():
+
+class Node:
     """Node"""
 
     def __init__(self, a_number):
@@ -8,7 +9,7 @@ class Node():
         self.next = None
 
 
-class LinkedList():
+class LinkedList:
     """Linked list"""
 
     def __init__(self):

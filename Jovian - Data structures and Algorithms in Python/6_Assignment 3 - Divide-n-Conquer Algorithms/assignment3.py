@@ -32,28 +32,13 @@ import jovian.pythondsa as jovian
 
 
 test0 = {
-    'input': {
-        'poly1': [2, 0, 5, 7],
-        'poly2': [3, 4, 2]
-    },
-    'output': [6, 8, 19, 41, 38, 14]
+    "input": {"poly1": [2, 0, 5, 7], "poly2": [3, 4, 2]},
+    "output": [6, 8, 19, 41, 38, 14],
 }
 
-test1 = {
-    'input': {
-        'poly1': [10, -1, 3],
-        'poly2': [2, 1]
-    },
-    'output': [20, 8, 5, 3]
-}
+test1 = {"input": {"poly1": [10, -1, 3], "poly2": [2, 1]}, "output": [20, 8, 5, 3]}
 
-test2 = {
-    'input': {
-        'poly1': [3, 2],
-        'poly2': [-7, 1]
-    },
-    'output': [-21, -11, 2]
-}
+test2 = {"input": {"poly1": [3, 2], "poly2": [-7, 1]}, "output": [-21, -11, 2]}
 
 tests = [test0, test1, test2]
 
@@ -74,7 +59,7 @@ def multiply_basic(poly1, poly2):
     prod = [0] * (size_poly1 + size_poly2 - 1)
     for i in range(size_poly1):
         for j in range(size_poly2):
-            prod[i+j] += poly1[i] * poly2[j]
+            prod[i + j] += poly1[i] * poly2[j]
             print(prod)
     return prod
 

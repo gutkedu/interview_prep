@@ -19,8 +19,6 @@
 # perform crud operations
 # The key inputs are user profiles, which contain username name and email
 
-from yaml import parse
-
 
 class User:
     def __init__(self, username, name, email):
@@ -29,20 +27,23 @@ class User:
         self.email = email
 
     def __repr__(self):
-        return "User(username='{}', name='{}', email='{}')".format(self.username, self.name, self.email)
+        return "User(username='{}', name='{}', email='{}')".format(
+            self.username, self.name, self.email
+        )
 
     def __str__(self):
         return self.__repr__()
 
 
 # 2. Come up with some example inputs & outputs.
-edu = User('edu', 'edu', 'edu@example.com')
-test = User('test', 'test', 'test@example.com')
-user10 = User('user10', 'user 10', 'user@example.com')
+edu = User("edu", "edu", "edu@example.com")
+test = User("test", "test", "test@example.com")
+user10 = User("user10", "user 10", "user@example.com")
 
 users = [edu, test, user10]
 
-# Exercise: List some scenarios for testing the class methods insert, find, update and list_all.
+# Exercise: List some scenarios for testing the class methods insert,
+# find, update and list_all.
 
 # Insert:
 #  Inserting into an empty database of users
@@ -78,7 +79,7 @@ class UserDatabaseLinear:
     def insert(self, user):
         i = 0
         while i < len(self.users):
-          # Find the first username greater than the new user username
+            # Find the first username greater than the new user username
             if self.users[i].username > user.username:
                 break
             i += 1
@@ -102,9 +103,8 @@ database.insert(edu)
 database.insert(user10)
 database.insert(test)
 
-user = database.find('edu')
-database.update(User(username='edu', name='edu_name',
-                email='edu_email@example.com'))
+user = database.find("edu")
+database.update(User(username="edu", name="edu_name", email="edu_email@example.com"))
 # print(user)
 # print(database.list_all())
 
@@ -149,26 +149,26 @@ tree2 = parse_tuple(tree_tuple)
 # print(tree2.left.left.key)
 
 
-def display_keys(node, space='\t', level=0):
+def display_keys(node, space="\t", level=0):
     # print(node.key if node else None, level)
 
     # If the node is empty
     if node is None:
-        print(space*level + '∅')
+        print(space * level + "∅")
         return
 
     # If the node is a leaf
     if node.left is None and node.right is None:
-        print(space*level + str(node.key))
+        print(space * level + str(node.key))
         return
 
     # If the node has children
-    display_keys(node.right, space, level+1)
-    print(space*level + str(node.key))
-    display_keys(node.left, space, level+1)
+    display_keys(node.right, space, level + 1)
+    print(space * level + str(node.key))
+    display_keys(node.left, space, level + 1)
 
 
-display_keys(tree2, '   ')
+display_keys(tree2, "   ")
 
 
 # QUESTION 3: Write a function to perform the inorder traversal of a binary tree.
@@ -182,27 +182,19 @@ def traverse_in_order(node):
     """Implementation of in order traversal of a binary tree"""
     if node is None:
         return []
-    return (traverse_in_order(node.left) +
-            [node.key] +
-            traverse_in_order(node.right))
+    return traverse_in_order(node.left) + [node.key] + traverse_in_order(node.right)
 
 
 def traverse_pre_order(node):
     if node is None:
         return []
-    return([node.key] +
-           traverse_pre_order(node.left) +
-           traverse_pre_order(node.right))
+    return [node.key] + traverse_pre_order(node.left) + traverse_pre_order(node.right)
 
 
 def traverse_post_order(node):
     if node is None:
         return []
-    return(
-        traverse_post_order(node.left) +
-        traverse_post_order(node.right) +
-        [node.key]
-    )
+    return traverse_post_order(node.left) + traverse_post_order(node.right) + [node.key]
 
 
 print(traverse_in_order(tree2))
@@ -213,6 +205,7 @@ print(traverse_post_order(tree2))
 # QUESTION 6: Write a function to calculate the height/depth of a binary tree
 
 # QUESTION 7: Write a function to count the number of nodes in a binary tree
+
 
 def tree_height(node):
     if node is None:
@@ -230,7 +223,7 @@ print(tree_height(tree2))
 print(tree_size(tree2))
 
 
-class TreeNodeFull():
+class TreeNodeFull:
     def __init__(self, key):
         self.key, self.left, self.right = key, None, None
 
@@ -247,32 +240,38 @@ class TreeNodeFull():
     def traverse_in_order(self):
         if self is None:
             return []
-        return (TreeNodeFull.traverse_in_order(self.left) +
-                [self.key] +
-                TreeNodeFull.traverse_in_order(self.right))
+        return (
+            TreeNodeFull.traverse_in_order(self.left)
+            + [self.key]
+            + TreeNodeFull.traverse_in_order(self.right)
+        )
 
-    def display_keys(self, space='\t', level=0):
+    def display_keys(self, space="\t", level=0):
         # If the node is empty
         if self is None:
-            print(space*level + '∅')
+            print(space * level + "∅")
             return
 
         # If the node is a leaf
         if self.left is None and self.right is None:
-            print(space*level + str(self.key))
+            print(space * level + str(self.key))
             return
 
         # If the node has children
-        display_keys(self.right, space, level+1)
-        print(space*level + str(self.key))
-        display_keys(self.left, space, level+1)
+        display_keys(self.right, space, level + 1)
+        print(space * level + str(self.key))
+        display_keys(self.left, space, level + 1)
 
     def to_tuple(self):
         if self is None:
             return None
         if self.left is None and self.right is None:
             return self.key
-        return TreeNodeFull.to_tuple(self.left),  self.key, TreeNodeFull.to_tuple(self.right)
+        return (
+            TreeNodeFull.to_tuple(self.left),
+            self.key,
+            TreeNodeFull.to_tuple(self.right),
+        )
 
     def __str__(self):
         return "BinaryTree <{}>".format(self.to_tuple())
@@ -291,6 +290,7 @@ class TreeNodeFull():
         else:
             node = TreeNode(data)
         return node
+
 
 # Binary Search Tree (BST)
 
@@ -326,9 +326,12 @@ def is_bst(node):
     is_bst_l, min_l, max_l = is_bst(node.left)
     is_bst_r, min_r, max_r = is_bst(node.right)
 
-    is_bst_node = (is_bst_l and is_bst_r and
-                   (max_l is None or node.key > max_l) and
-                   (min_r is None or node.key < min_r))
+    is_bst_node = (
+        is_bst_l
+        and is_bst_r
+        and (max_l is None or node.key > max_l)
+        and (min_r is None or node.key < min_r)
+    )
 
     min_key = min(remove_none([min_l, node.key, min_r]))
     max_key = max(remove_none([max_l, node.key, max_r]))
@@ -338,22 +341,23 @@ def is_bst(node):
     return is_bst_node, min_key, max_key
 
 
-tree1 = TreeNodeFull.parse_tuple(
-    ((1, 3, None), 2, ((None, 3, 4), 5, (6, 7, 8))))
+tree1 = TreeNodeFull.parse_tuple(((1, 3, None), 2, ((None, 3, 4), 5, (6, 7, 8))))
 print(is_bst(tree1))
 
 tree2 = TreeNodeFull.parse_tuple(
-    (('aakash', 'biraj', 'hemanth'), 'jadhesh', ('siddhant', 'sonaksh', 'vishal')))
+    (("aakash", "biraj", "hemanth"), "jadhesh", ("siddhant", "sonaksh", "vishal"))
+)
 print(is_bst(tree2))
 
 
-class BSTNode():
+class BSTNode:
     def __init__(self, key, value=None):
         self.key = key
         self.value = value
         self.left = None
         self.right = None
         self.parent = None
+
 
 # QUESTION 11: Write a function to insert a new node into a BST.
 
@@ -380,6 +384,7 @@ print(tree_height(bsdtree))
 
 # QUESTION 11: Find the value associated with a given key in a BST.
 
+
 def find(node, key):
     if node is None:
         return None
@@ -391,7 +396,7 @@ def find(node, key):
         return find(node.right, key)
 
 
-bsdnode = find(bsdtree, 'edu')
+bsdnode = find(bsdtree, "edu")
 print(bsdnode.key, bsdnode.value)
 
 # QUESTION 12: Write a function to update the value associated with a given
@@ -404,9 +409,10 @@ def update(node, key, value):
         target.value = value
 
 
-update(bsdtree, 'test', User('testUpdate',
-       'test update name', 'testUpdate@example.com'))
-#node = find(bsdtree, 'test')
+update(
+    bsdtree, "test", User("testUpdate", "test update name", "testUpdate@example.com")
+)
+# node = find(bsdtree, 'test')
 # print(node.value)
 
 # QUESTION 13: Write a function to retrieve all the key-values pairs stored in
@@ -426,6 +432,7 @@ print(list_all(bsdtree))
 
 # QUESTION 14: Write a function to determine if a binary tree is balanced.
 
+
 def is_balanced(node):
     if node is None:
         return True, 0
@@ -436,7 +443,7 @@ def is_balanced(node):
     return balanced, height
 
 
-print('Is balanced?', is_balanced(bsdtree))
+print("Is balanced?", is_balanced(bsdtree))
 
 # Balanced Binary Search Trees
 # QUESTION 15: Write a function to create a balanced BST from a sorted
@@ -454,8 +461,8 @@ def make_balanced_bst(data, lo=0, hi=None, parent=None):
 
     root = BSTNode(key, value)
     root.parent = parent
-    root.left = make_balanced_bst(data, lo, mid-1, root)
-    root.right = make_balanced_bst(data, mid+1, hi, root)
+    root.left = make_balanced_bst(data, lo, mid - 1, root)
+    root.right = make_balanced_bst(data, mid + 1, hi, root)
 
     return root
 
@@ -463,7 +470,7 @@ def make_balanced_bst(data, lo=0, hi=None, parent=None):
 data = [(user.username, user) for user in users]
 tree_new = make_balanced_bst(data)
 display_keys(tree_new)
-print('Is balanced?', is_balanced(tree_new))
+print("Is balanced?", is_balanced(tree_new))
 
 # Balancing an Unbalanced BST
 # QUESTION 16: Write a function to balance an unbalanced binary search tree.
@@ -477,7 +484,8 @@ def balance_bst(node):
 
 # We are now ready to return to our original problem statement.
 
-class TreeMap():
+
+class TreeMap:
     def __init__(self):
         self.root = None
 

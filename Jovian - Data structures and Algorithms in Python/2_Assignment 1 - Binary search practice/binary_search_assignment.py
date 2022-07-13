@@ -1,4 +1,3 @@
-
 # You are given list of numbers, obtained by rotating a sorted list an
 # unknown number of times. Write a function to determine the minimum number
 # of times the original sorted list was rotated to obtain the given list.
@@ -38,47 +37,59 @@ from jovian.pythondsa import binary_search
 
 tests = []
 
-tests.append({
-    'input': {
-        'nums': [19, 25, 29, 3, 5, 6, 7, 8, 1, 14],
-    },
-    'output': 3
-})
+tests.append(
+    {
+        "input": {
+            "nums": [19, 25, 29, 3, 5, 6, 7, 8, 1, 14],
+        },
+        "output": 3,
+    }
+)
 
-tests.append({
-    'input': {
-        'nums': [4, 5, 6, 7, 8, 1, 2, 3],
-    },
-    'output': 5
-})
+tests.append(
+    {
+        "input": {
+            "nums": [4, 5, 6, 7, 8, 1, 2, 3],
+        },
+        "output": 5,
+    }
+)
 
-tests.append({
-    'input': {
-        'nums': [1, 2, 3, 4, 5],
-    },
-    'output': 0
-})
+tests.append(
+    {
+        "input": {
+            "nums": [1, 2, 3, 4, 5],
+        },
+        "output": 0,
+    }
+)
 
-tests.append({
-    'input': {
-        'nums': [5, 1, 2, 3, 4],
-    },
-    'output': 1
-})
+tests.append(
+    {
+        "input": {
+            "nums": [5, 1, 2, 3, 4],
+        },
+        "output": 1,
+    }
+)
 
-tests.append({
-    'input': {
-        'nums': [],
-    },
-    'output': 0
-})
+tests.append(
+    {
+        "input": {
+            "nums": [],
+        },
+        "output": 0,
+    }
+)
 
-tests.append({
-    'input': {
-        'nums': [1],
-    },
-    'output': 0
-})
+tests.append(
+    {
+        "input": {
+            "nums": [1],
+        },
+        "output": 0,
+    }
+)
 
 # 3. Come up with a correct solution for the problem. State it in plain English.
 # If a sorted number is rotated k times, then the smallest number in the list
@@ -99,6 +110,7 @@ tests.append({
 
 
 # 4. Implement the solution and test it using example inputs. Fix bugs, if any.
+
 
 def count_rotations_linear(nums: list):
     """CountRotations using linear search"""
@@ -146,13 +158,12 @@ jovian.evaluate_test_cases(count_rotations_linear, tests)
 def count_rotations_binary(nums: list):
     """Counts the number of rotations using binary search"""
     lo = 0
-    hi = len(nums)-1
+    hi = len(nums) - 1
     while lo <= hi:
         mid = (lo + hi) // 2
         mid_number = nums[mid]
-        print("lo:", lo, ", hi:", hi, ", mid:",
-              mid, ", mid_number:", mid_number)
-        if mid > 0 and nums[mid] < nums[mid-1]:
+        print("lo:", lo, ", hi:", hi, ", mid:", mid, ", mid_number:", mid_number)
+        if mid > 0 and nums[mid] < nums[mid - 1]:
             return mid
         elif nums[mid] < nums[hi]:
             hi = mid - 1
@@ -167,4 +178,5 @@ jovian.evaluate_test_cases(count_rotations_binary, tests)
 def count_rotations_generic(nums):
     def condition(mid):
         pass  # replace this with your code
-    return binary_search(0, len(nums)-1, condition)
+
+    return binary_search(0, len(nums) - 1, condition)

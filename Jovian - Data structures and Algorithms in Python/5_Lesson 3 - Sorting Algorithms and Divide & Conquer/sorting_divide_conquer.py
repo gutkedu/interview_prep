@@ -33,66 +33,38 @@ import jovian.pythondsa as jovian
 
 # List of numbers in random order
 test0 = {
-    'input': {
-        'nums': [4, 2, 6, 3, 4, 6, 2, 1]
-    },
-    'output': [1, 2, 2, 3, 4, 4, 6, 6]
+    "input": {"nums": [4, 2, 6, 3, 4, 6, 2, 1]},
+    "output": [1, 2, 2, 3, 4, 4, 6, 6],
 }
 
 # List of numbers in random order
 test1 = {
-    'input': {
-        'nums': [5, 2, 6, 1, 23, 7, -12, 12, -243, 0]
-    },
-    'output': [-243, -12, 0, 1, 2, 5, 6, 7, 12, 23]
+    "input": {"nums": [5, 2, 6, 1, 23, 7, -12, 12, -243, 0]},
+    "output": [-243, -12, 0, 1, 2, 5, 6, 7, 12, 23],
 }
 
 # A list that's already sorted
-test2 = {
-    'input': {
-        'nums': [3, 5, 6, 8, 9, 10, 99]
-    },
-    'output': [3, 5, 6, 8, 9, 10, 99]
-}
+test2 = {"input": {"nums": [3, 5, 6, 8, 9, 10, 99]}, "output": [3, 5, 6, 8, 9, 10, 99]}
 
 # A list that's sorted in descending order
-test3 = {
-    'input': {
-        'nums': [99, 10, 9, 8, 6, 5, 3]
-    },
-    'output': [3, 5, 6, 8, 9, 10, 99]
-}
+test3 = {"input": {"nums": [99, 10, 9, 8, 6, 5, 3]}, "output": [3, 5, 6, 8, 9, 10, 99]}
 
 # A list containing repeating elements
 test4 = {
-    'input': {
-        'nums': [5, -12, 2, 6, 1, 23, 7, 7, -12, 6, 12, 1, -243, 1, 0]
-    },
-    'output': [-243, -12, -12, 0, 1, 1, 1, 2, 5, 6, 6, 7, 7, 12, 23]
+    "input": {"nums": [5, -12, 2, 6, 1, 23, 7, 7, -12, 6, 12, 1, -243, 1, 0]},
+    "output": [-243, -12, -12, 0, 1, 1, 1, 2, 5, 6, 6, 7, 7, 12, 23],
 }
 
 # An empty list
-test5 = {
-    'input': {
-        'nums': []
-    },
-    'output': []
-}
+test5 = {"input": {"nums": []}, "output": []}
 
 # A list containing just one element
-test6 = {
-    'input': {
-        'nums': [23]
-    },
-    'output': [23]
-}
+test6 = {"input": {"nums": [23]}, "output": [23]}
 
 # A list containing one element repeated many times
 test7 = {
-    'input': {
-        'nums': [42, 42, 42, 42, 42, 42, 42]
-    },
-    'output': [42, 42, 42, 42, 42, 42, 42]
+    "input": {"nums": [42, 42, 42, 42, 42, 42, 42]},
+    "output": [42, 42, 42, 42, 42, 42, 42],
 }
 
 
@@ -100,12 +72,7 @@ in_list = list(range(10000))
 out_list = list(range(10000))
 random.shuffle(in_list)
 
-test8 = {
-    'input': {
-        'nums': in_list
-    },
-    'output': out_list
-}
+test8 = {"input": {"nums": in_list}, "output": out_list}
 
 tests = [test0, test1, test2, test3, test4, test5, test6, test7, test8]
 
@@ -134,13 +101,13 @@ def bubble_sort(nums):
     nums = list(nums)
 
     # 4.Repeat the process n-1 times
-    for _ in range(len(nums)-1):
+    for _ in range(len(nums) - 1):
         # 1. Iterate over the array (except for the last element)
         for i in range(len(nums) - 1):
             # 2.Compare the number with
-            if nums[i] > nums[i+1]:
+            if nums[i] > nums[i + 1]:
                 # 3.Swap the elements
-                nums[i], nums[i+1] = nums[i+1], nums[i]
+                nums[i], nums[i + 1] = nums[i + 1], nums[i]
     return nums
 
 
@@ -164,7 +131,7 @@ def insertion_sort(nums):
         j = i - 1
         while j >= 0 and nums[j] > cur:
             j -= 1
-        nums.insert(j+1, cur)
+        nums.insert(j + 1, cur)
     return nums
 
 
@@ -239,9 +206,9 @@ def merge(nums1, nums2):
     return merged + nums1_tail + nums2_tail
 
 
-#print(merge([1, 4, 7, 9, 11], [-1, 0, 2, 3, 8, 12]))
+# print(merge([1, 4, 7, 9, 11], [-1, 0, 2, 3, 8, 12]))
 
-#jovian.evaluate_test_cases(merge_sort, tests)
+# jovian.evaluate_test_cases(merge_sort, tests)
 
 
 # 9. Analyze the algorithm's complexity and identify inefficiencies
@@ -271,23 +238,24 @@ def merge(nums1, nums2):
 #  4. The pivot element divides the array into two parts which can be sorted
 # independently by making a recursive call to quicksort.
 
+
 def quicksort(nums, start=0, end=None):
-    #print('quicksort', nums, start, end)
+    # print('quicksort', nums, start, end)
     if end is None:
         nums = list(nums)  # Done one time only, to not modify input list
         end = len(nums) - 1  # Set end to the final element of the list
     # if the list has at least two elements
     if start < end:
         pivot = partition(nums, start, end)
-        quicksort(nums, start, pivot-1)
-        quicksort(nums, pivot+1, end)
+        quicksort(nums, start, pivot - 1)
+        quicksort(nums, pivot + 1, end)
     return nums
 
 
 def partition(nums, start=0, end=None):
     if end is None:
         end = len(nums) - 1
-    left, right = start, end-1
+    left, right = start, end - 1
     while right > left:
         # Increment left pointer if number is less or equal to pivot
         if nums[left] <= nums[end]:
@@ -306,7 +274,7 @@ def partition(nums, start=0, end=None):
         return end
 
 
-#jovian.evaluate_test_cases(quicksort, tests)
+# jovian.evaluate_test_cases(quicksort, tests)
 
 
 # Analyze the algorithm's complexity and identify inefficiencies
@@ -325,60 +293,63 @@ def partition(nums, start=0, end=None):
 # the descending order of likes. To achieve this, all we need is a custom
 # comparison function to compare two notebooks.
 
+
 class Notebook:
     def __init__(self, title, username, likes):
         self.title, self.username, self.likes = title, username, likes
 
     def __repr__(self):
-        return 'Notebook <"{}/{}", {} likes>'.format(self.username, self.title, self.likes)
+        return 'Notebook <"{}/{}", {} likes>'.format(
+            self.username, self.title, self.likes
+        )
 
 
 # Test cases
-nb0 = Notebook('pytorch-basics', 'aakashns', 373)
-nb1 = Notebook('linear-regression', 'siddhant', 532)
-nb2 = Notebook('logistic-regression', 'vikas', 31)
-nb3 = Notebook('feedforward-nn', 'sonaksh', 94)
-nb4 = Notebook('cifar10-cnn', 'biraj', 2)
-nb5 = Notebook('cifar10-resnet', 'tanya', 29)
-nb6 = Notebook('anime-gans', 'hemanth', 80)
-nb7 = Notebook('python-fundamentals', 'vishal', 136)
-nb8 = Notebook('python-functions', 'aakashns', 74)
-nb9 = Notebook('python-numpy', 'siddhant', 92)
+nb0 = Notebook("pytorch-basics", "aakashns", 373)
+nb1 = Notebook("linear-regression", "siddhant", 532)
+nb2 = Notebook("logistic-regression", "vikas", 31)
+nb3 = Notebook("feedforward-nn", "sonaksh", 94)
+nb4 = Notebook("cifar10-cnn", "biraj", 2)
+nb5 = Notebook("cifar10-resnet", "tanya", 29)
+nb6 = Notebook("anime-gans", "hemanth", 80)
+nb7 = Notebook("python-fundamentals", "vishal", 136)
+nb8 = Notebook("python-functions", "aakashns", 74)
+nb9 = Notebook("python-numpy", "siddhant", 92)
 notebooks = [nb0, nb1, nb2, nb3, nb4, nb5, nb6, nb7, nb8, nb9]
 
 
 def compare_likes(nb1, nb2):
     if nb1.likes > nb2.likes:
-        return 'lesser'
+        return "lesser"
     elif nb1.likes == nb2.likes:
-        return 'equal'
+        return "equal"
     elif nb1.likes < nb2.likes:
-        return 'greater'
+        return "greater"
 
 
 def default_compare(x, y):
     if x < y:
-        return 'less'
+        return "less"
     elif x == y:
-        return 'equal'
+        return "equal"
     else:
-        return 'greater'
+        return "greater"
 
 
 def merge_sort_2(objs, compare=default_compare):
     if len(objs) < 2:
         return objs
     mid = len(objs) // 2
-    return merge_2(merge_sort_2(objs[:mid], compare),
-                   merge_sort_2(objs[mid:], compare),
-                   compare)
+    return merge_2(
+        merge_sort_2(objs[:mid], compare), merge_sort_2(objs[mid:], compare), compare
+    )
 
 
 def merge_2(left, right, compare):
     i, j, merged = 0, 0, []
     while i < len(left) and j < len(right):
         result = compare(left[i], right[j])
-        if result == 'lesser' or result == 'equal':
+        if result == "lesser" or result == "equal":
             merged.append(left[i])
             i += 1
         else:
@@ -387,13 +358,14 @@ def merge_2(left, right, compare):
     return merged + left[i:] + right[j:]
 
 
-#sorted_notebooks = merge_sort_2(notebooks, compare_likes)
+# sorted_notebooks = merge_sort_2(notebooks, compare_likes)
 # print(sorted_notebooks)
+
 
 def compare_titles(nb1, nb2):
     if nb1.title < nb2.title:
-        return 'lesser'
+        return "lesser"
     elif nb1.title == nb2.title:
-        return 'equal'
+        return "equal"
     elif nb1.title > nb2.title:
-        return 'greater'
+        return "greater"
